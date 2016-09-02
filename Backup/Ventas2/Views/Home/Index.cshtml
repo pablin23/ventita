@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div>
+    nombre :
+    <input type="text" name="name" value=" " />
+    Nit :
+    <input type="text" name="name" value=" " />
+    Descripcion :
+    <input type="text" name="name" value=" " />
+
+    <h3>PRODUCTOS</h3>
+    <table id="tblProductos">
+        <th>
+            <td>Nr.</td>
+            <td>Nombre.</td>
+            <td>Cantidad.</td>
+            <td></td>
+        </th>
+        <tbody>
+          
+        </tbody>
+    </table>
+    @*   <div>
+        <input type="button" value="Vender" />
+    </div>*@
+</div>
+@*<div>
+
+    <table>
+        <th>
+            <td>Nr.</td>
+            <td>Nombre.</td>
+            <td>Precio.</td>
+            <td></td>
+        </th>
+        <tr>
+            <td>1</td>
+            <td>peras</td>
+            <td>25</td>
+            <td>
+                <input type="button" name="name" value="agregar" /></td>
+        </tr>
+    </table>
+</div>*@
+
+
+
+<style>
+    td {
+        width: 138px;
+        border-color: green;
+    }
+</style>
+
+
+<script>
+    cargarProductos();
+
+    function cargarProductos() {
+        debugger;
+        $.ajax({
+            url: '/Home/ObtenerProductos',
+            type: 'GET',
+            data: null,
+            success: function (data) {
+                debugger;
+                cargarTablaProductos(data);
+            }
+        });
+    }
+
+    //<tr>
+    //          <td>1</td>
+    //          <td>peras</td>
+    //          <td>2</td>
+    //          <td>
+    //              <input type="button" name="name" value="Elminar" /></td>
+    //      </tr>
+
+    function cargarTablaProductos(productos) {
+        for (var i = 0; i < productos.length; i++) {
+            var fila  = '<tr><td>' + i + '</td><td>' + productos[i].NombrewProducto
+                + '</td><td>' + productos[i].Precio + '</td><td><input type="button" name="name" value="Vender" /></td></tr>';
+            $('#tblProductos tbody').append(fila);
+        }
+    }
+
+</script>
